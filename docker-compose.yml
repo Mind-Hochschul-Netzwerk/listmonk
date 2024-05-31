@@ -38,8 +38,8 @@ services:
       - ./config.toml:/listmonk/config.toml
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.authelia.rule=Host(`listmonk.${DOMAINNAME}`)'
-      - 'traefik.http.routers.authelia.entrypoints=websecure'
+      - 'traefik.http.routers.listmonk.rule=Host(`listmonk.${DOMAINNAME}`)'
+      - 'traefik.http.routers.listmonk.entrypoints=websecure'
 
 networks:
   traefik:
