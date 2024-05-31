@@ -41,6 +41,7 @@ services:
       - 'traefik.enable=true'
       - 'traefik.http.routers.listmonk.rule=Host(`listmonk.${DOMAINNAME}`)'
       - 'traefik.http.routers.listmonk.entrypoints=websecure'
+      - traefik.http.routers.listmonk.middlewares=secheader@file
 
 networks:
   traefik:
