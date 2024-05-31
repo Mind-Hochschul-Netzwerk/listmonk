@@ -6,6 +6,7 @@ x-app-defaults: &app-defaults
     - traefik
   environment:
     - TZ=Europe/Berlin
+  env_file: .env
 
 x-db-defaults: &db-defaults
   image: postgres:16
@@ -19,6 +20,7 @@ x-db-defaults: &db-defaults
     interval: 10s
     timeout: 5s
     retries: 6
+  env_file: .env
 
 services:
   db:
