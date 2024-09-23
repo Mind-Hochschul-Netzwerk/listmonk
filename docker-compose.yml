@@ -25,13 +25,13 @@ x-db-defaults: &db-defaults
 services:
   db:
     <<: *db-defaults
-    container_name: listmonk_db
+    container_name: listmonk-db
     volumes:
       - /srv/listmonk/postgres/db/16/data:/var/lib/postgresql/data
 
   app:
     <<: *app-defaults
-    container_name: listmonk_app
+    container_name: listmonk
     depends_on:
       - db
     volumes:
@@ -39,8 +39,6 @@ services:
       - /srv/listmonk/media:/media
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.listmonk.rule=Host(`listmonk.${DOMAINNAME}`)'
-      - 'traefik.http.routers.listmonk.entrypoints=websecure'
       - traefik.http.routers.listmonk.middlewares=secheader@file
 
 networks:
