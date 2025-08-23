@@ -27,7 +27,7 @@ services:
     <<: *db-defaults
     container_name: listmonk-db
     volumes:
-      - /srv/listmonk/postgres/db/16/data:/var/lib/postgresql/data
+      - "${VOLUMES_DIR}/postgres/db/16/data:/var/lib/postgresql/data"
 
   app:
     <<: *app-defaults
@@ -36,10 +36,11 @@ services:
       - db
     volumes:
       - ./config.toml:/listmonk/config.toml
-      - /srv/listmonk/media:/media
+      - "${VOLUMES_DIR}/media:/media"
     labels:
       - 'traefik.enable=true'
       - traefik.http.routers.listmonk.middlewares=secheader@file
+    command: [sh, -c, "./listmonk --install --idempotent --yes && ./listmonk --upgrade --yes && ./listmonk"]
 
 networks:
   traefik:
